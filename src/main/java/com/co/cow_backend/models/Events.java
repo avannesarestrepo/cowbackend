@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "cow")
+@Table(name = "events")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Events {
     @Id

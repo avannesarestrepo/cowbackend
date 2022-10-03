@@ -6,12 +6,12 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "cow")
+@Table(name = "cow_gestation")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class CowGestation {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_proceso_gestacion_vaca")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idProcesoGestacionVaca;
     @Column(name = "id_vaca", length = 50, nullable = false)
     private Integer idVaca;
