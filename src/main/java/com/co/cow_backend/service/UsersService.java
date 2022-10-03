@@ -8,6 +8,7 @@ import java.util.List;
 public interface UsersService {
     List<Users> findAll();
     Response findById(Integer id);
-    Users saveOrUpdate(Users users);
-    void delete(Integer id);
+    Response saveOrUpdate(Users users);
+    Response delete(Integer id);
+    Response login(Integer user, String password);
 }
