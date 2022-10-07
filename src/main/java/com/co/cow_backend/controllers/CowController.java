@@ -1,6 +1,7 @@
 package com.co.cow_backend.controllers;
 
 import com.co.cow_backend.models.Cow;
+import com.co.cow_backend.service.CowGestationService;
 import com.co.cow_backend.service.CowService;
 import com.co.cow_backend.utils.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ public class CowController {
     @Autowired
     CowService cowService;
 
+    @Autowired
+    CowGestationService cowGestationService;
+
     @GetMapping()
     public ResponseEntity<Object> getAllCow(){
         return new ResponseEntity<>(cowService.findAll(), HttpStatus.OK);
@@ -28,7 +32,11 @@ public class CowController {
 
     @PostMapping()
     public ResponseEntity<Response> saveOrUpdate(@RequestBody Cow cow){
-        return new ResponseEntity<>(cowService.saveOrUpdate(cow), HttpStatus.OK);
+        Response cowResponse = cowService.saveOrUpdate(cow);
+        if(!cowResponse.getStatus().equals("Failed")){
+            cowGestationService.saveNewCow((Cow) cowResponse.getObject());
+        }
+        return new ResponseEntity<>(cowResponse, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

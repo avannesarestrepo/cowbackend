@@ -3,6 +3,7 @@ package com.co.cow_backend.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -16,13 +17,13 @@ public class CowGestation {
     @Column(name = "id_vaca", length = 50, nullable = false)
     private Integer idVaca;
     @Column(name = "fecha_celo")
-    private Date fechaCelo;
+    private LocalDate fechaCelo;
     @Column(name = "fecha_Inseminacion")
-    private Date fechaInseminacion;
+    private LocalDate fechaInseminacion;
     @Column(name = "fecha_parto")
-    private Date fechaParto;
+    private LocalDate fechaParto;
     @Column(name = "fecha_secado")
-    private Date fechaSecado;
+    private LocalDate fechaSecado;
 
     public Integer getIdProcesoGestacionVaca() {
         return idProcesoGestacionVaca;
@@ -40,35 +41,35 @@ public class CowGestation {
         this.idVaca = idVaca;
     }
 
-    public Date getFechaCelo() {
+    public LocalDate getFechaCelo() {
         return fechaCelo;
     }
 
-    public void setFechaCelo(Date fechaCelo) {
+    public void setFechaCelo(LocalDate fechaCelo) {
         this.fechaCelo = fechaCelo;
     }
 
-    public Date getFechaInseminacion() {
+    public LocalDate getFechaInseminacion() {
         return fechaInseminacion;
     }
 
-    public void setFechaInseminacion(Date fechaInseminacion) {
+    public void setFechaInseminacion(LocalDate fechaInseminacion) {
         this.fechaInseminacion = fechaInseminacion;
     }
 
-    public Date getFechaParto() {
+    public LocalDate getFechaParto() {
         return fechaParto;
     }
 
-    public void setFechaParto(Date fechaParto) {
+    public void setFechaParto(LocalDate fechaParto) {
         this.fechaParto = fechaParto;
     }
 
-    public Date getFechaSecado() {
+    public LocalDate getFechaSecado() {
         return fechaSecado;
     }
 
-    public void setFechaSecado(Date fechaSecado) {
+    public void setFechaSecado(LocalDate fechaSecado) {
         this.fechaSecado = fechaSecado;
     }
 }
