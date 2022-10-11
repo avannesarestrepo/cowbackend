@@ -1,19 +1,17 @@
 package com.co.cow_backend.ServiceImpl;
 
-import com.co.cow_backend.models.Cow;
 import com.co.cow_backend.models.CowGestation;
 import com.co.cow_backend.models.Events;
 import com.co.cow_backend.repository.EventsRepository;
 import com.co.cow_backend.service.EventsService;
 import com.co.cow_backend.utils.Constant;
-import com.co.cow_backend.utils.EventsDTO;
 import com.co.cow_backend.utils.Response;
 import com.co.cow_backend.utils.ResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -42,6 +40,18 @@ public class EventsServiceImpl implements EventsService {
             return responseDTO.setResponseSuccess(listEvents);
         }catch (Exception e){
             return responseDTO.setResponseFailed(constant.CODE_INTERNAL_ERROR_SERVER(), "Error generico");
+        }
+    }
+
+    @Override
+    public Response update(Events events) {
+        ResponseDTO responseDTO = new ResponseDTO();
+        try {
+            Events eventResponse = eventsRepository.save(events);
+            return responseDTO.setResponseSuccess(eventResponse);
+        }catch (DataIntegrityViolationException e) {
+            return responseDTO.setResponseFailed(constant.CODE_INTERNAL_ERROR_SERVER(),
+                    constant.MESSAGE_DATA_INTEGRATY_VIOLATION());
         }
     }
 

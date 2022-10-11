@@ -42,8 +42,7 @@ public class CowController {
             Response cowGestation = cowGestationService.saveNewCow((Cow) cowResponse.getObject());
             eventsService.saveAll((CowGestation) cowGestation.getObject());
         }
-        return new Response
-        Entity<>(cowResponse, HttpStatus.OK);
+        return new ResponseEntity<>(cowResponse, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
