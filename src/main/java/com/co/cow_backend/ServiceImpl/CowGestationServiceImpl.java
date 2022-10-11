@@ -18,6 +18,13 @@ public class CowGestationServiceImpl implements CowGestationService {
     CowGestationRepository cowGestationRepository;
 
     @Override
+    public Response findById(Integer idVaca) {
+        ResponseDTO responseDTO = new ResponseDTO();
+        CowGestation cowGestation = cowGestationRepository.findByIdVaca(idVaca);
+        return responseDTO.setResponseSuccess(cowGestation);
+    }
+
+    @Override
     public Response saveNewCow(Cow cow) {
         ResponseDTO responseDTO = new ResponseDTO();
         CowGestation cowGestation = new CowGestation();

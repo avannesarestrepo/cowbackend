@@ -5,4 +5,5 @@ import com.co.cow_backend.utils.Response;
 
 public interface CowGestationService {
     Response saveNewCow(Cow cow);
+    Response findById(Integer idVaca);
 }
