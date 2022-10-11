@@ -1,30 +1,19 @@
-package com.co.cow_backend.models;
+package com.co.cow_backend.utils;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "events")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Events {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_notification")
+public class EventsDTO {
     private Integer idNotification;
-    @Column(name = "id_vaca")
     private Integer idVaca;
-    @Column(name = "nombre_evento")
+    private String nombreVaca;
     private String nombreEvento;
-    @Column(name = "fecha_evento", nullable = false)
     private LocalDate fechaEvento;
-    @Column(name = "estado", nullable = false)
     private Boolean estado;
 
-    public Events(){}
-    public Events(Integer idVaca, String nombreEvento, LocalDate fechaEvento, Boolean estado) {
+    public EventsDTO(Integer idNotification, Integer idVaca, String nombreVaca, String nombreEvento, LocalDate fechaEvento, Boolean estado) {
+        this.idNotification = idNotification;
         this.idVaca = idVaca;
+        this.nombreVaca = nombreVaca;
         this.nombreEvento = nombreEvento;
         this.fechaEvento = fechaEvento;
         this.estado = estado;
@@ -44,6 +33,14 @@ public class Events {
 
     public void setIdVaca(Integer idVaca) {
         this.idVaca = idVaca;
+    }
+
+    public String getNombreVaca() {
+        return nombreVaca;
+    }
+
+    public void setNombreVaca(String nombreVaca) {
+        this.nombreVaca = nombreVaca;
     }
 
     public String getNombreEvento() {
