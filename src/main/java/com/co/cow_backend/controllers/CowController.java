@@ -47,6 +47,7 @@ public class CowController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Response> deleteCow(@PathVariable("id") Integer id){
+        cowGestationService.delete(id);
         return new ResponseEntity<>(cowService.delete(id), HttpStatus.OK);
     }
 }

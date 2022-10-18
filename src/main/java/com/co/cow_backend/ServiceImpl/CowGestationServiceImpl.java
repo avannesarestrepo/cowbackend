@@ -25,9 +25,23 @@ public class CowGestationServiceImpl implements CowGestationService {
     }
 
     @Override
+    public void delete(Integer idVaca) {
+        CowGestation cowGestationVerify = cowGestationRepository.findByIdVaca(idVaca);
+        Integer idProcesoGestacionVaca = cowGestationVerify.getIdProcesoGestacionVaca();
+        if(cowGestationVerify.getIdProcesoGestacionVaca() != null){
+            cowGestationRepository.deleteById(idProcesoGestacionVaca);
+        }
+    }
+
+    @Override
     public Response saveNewCow(Cow cow) {
         ResponseDTO responseDTO = new ResponseDTO();
         CowGestation cowGestation = new CowGestation();
+
+        CowGestation cowGestationVerify = cowGestationRepository.findByIdVaca(cow.getIdVaca());
+        if(cowGestationVerify != null){
+            cowGestation.setIdProcesoGestacionVaca(cowGestationVerify.getIdProcesoGestacionVaca());
+        }
 
         cowGestation.setIdVaca(cow.getIdVaca());
         cowGestation.setFechaCelo(calculateDate(cow.getFechaNacimiento(), 15, false));

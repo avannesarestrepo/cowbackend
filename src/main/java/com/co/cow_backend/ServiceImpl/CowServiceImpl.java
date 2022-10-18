@@ -49,13 +49,15 @@ public class CowServiceImpl implements CowService {
 
         Predicate<Cow> cowExist = cows -> cowRepository.existByName(cows.getNombre().toLowerCase()) > 0;
 
-        if(cowExist.test(cow)){
+        if(cow.getIdVaca() == null && cowExist.test(cow)){
             return responseDTO.setResponseFailed(constant.CODE_CONFLICT(), constant.MESSAGE_CONFLICT_DUPLICATE());
         }
 
         cow.setNombre(cow.getNombre().toLowerCase());
-        cow.setFechaVacunaAftosa(calculateDate(cow.getFechaNacimiento(), 40, true));
-        cow.setFechaVacunaBrucelosis(calculateDate(cow.getFechaNacimiento(), 3, false));
+        if(cow.getIdVaca() == null){
+            cow.setFechaVacunaAftosa(calculateDate(cow.getFechaNacimiento(), 40, true));
+            cow.setFechaVacunaBrucelosis(calculateDate(cow.getFechaNacimiento(), 3, false));
+        }
         cow.setNumeroPartos(0);
 
         try {
