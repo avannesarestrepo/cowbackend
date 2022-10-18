@@ -23,6 +23,11 @@ public class EventsController {
         return new ResponseEntity<>(eventsService.findByDate(), HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<List<Events>> getByIdVaca(@PathVariable("id") Integer id){
+        return new ResponseEntity<>(eventsService.findByIdVaca(id), HttpStatus.OK);
+    }
+
     @PostMapping()
     public ResponseEntity<Response> update(@RequestBody Events events){
         return new ResponseEntity<>(eventsService.update(events), HttpStatus.OK);

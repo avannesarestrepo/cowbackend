@@ -53,6 +53,13 @@ public class CowGestationServiceImpl implements CowGestationService {
         return responseDTO.setResponseSuccess(cowGestation);
     }
 
+    @Override
+    public Response save(CowGestation cowGestation) {
+        ResponseDTO responseDTO = new ResponseDTO();
+        CowGestation cowGestationResponse = cowGestationRepository.save(cowGestation);
+        return responseDTO.setResponseSuccess(cowGestationResponse);
+    }
+
     private LocalDate calculateDate(LocalDate date, int time, Boolean isDays){
         LocalDate result = date;
         int addTime =  0;

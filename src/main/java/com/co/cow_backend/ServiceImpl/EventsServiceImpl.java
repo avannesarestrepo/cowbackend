@@ -33,6 +33,11 @@ public class EventsServiceImpl implements EventsService {
     }
 
     @Override
+    public List<Events> findByIdVaca(Integer idVaca) {
+        return eventsRepository.getByIdVaca(idVaca);
+    }
+
+    @Override
     public Response saveAll(CowGestation cowGestation) {
         ResponseDTO responseDTO = new ResponseDTO();
         try {

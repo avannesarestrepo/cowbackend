@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface EventsService {
     List<Events> findByDate();
+    List<Events> findByIdVaca(Integer idVaca);
     Response saveAll(CowGestation cowGestation);
 
     Response update(Events events);

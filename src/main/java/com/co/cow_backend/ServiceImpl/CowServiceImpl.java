@@ -54,7 +54,7 @@ public class CowServiceImpl implements CowService {
         }
 
         cow.setNombre(cow.getNombre().toLowerCase());
-        if(cow.getIdVaca() == null){
+        if(cow.getIdVaca() == 0){
             cow.setFechaVacunaAftosa(calculateDate(cow.getFechaNacimiento(), 40, true));
             cow.setFechaVacunaBrucelosis(calculateDate(cow.getFechaNacimiento(), 3, false));
         }
