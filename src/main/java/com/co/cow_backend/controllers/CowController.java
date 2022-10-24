@@ -40,6 +40,7 @@ public class CowController {
         Response cowResponse = cowService.saveOrUpdate(cow);
         if(!cowResponse.getStatus().equals("Failed")){
             Response cowGestation = cowGestationService.saveNewCow((Cow) cowResponse.getObject());
+            eventsService.saveAllVacunas((Cow) cowResponse.getObject());
             eventsService.saveAll((CowGestation) cowGestation.getObject());
         }
         return new ResponseEntity<>(cowResponse, HttpStatus.OK);

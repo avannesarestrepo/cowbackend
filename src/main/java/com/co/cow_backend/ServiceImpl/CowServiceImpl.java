@@ -63,7 +63,6 @@ public class CowServiceImpl implements CowService {
             cow.setFechaVacunaAftosa(calculateDate(cow.getFechaNacimiento(), 40, true));
             cow.setFechaVacunaBrucelosis(calculateDate(cow.getFechaNacimiento(), 3, false));
             cow.setNumeroPartos(0);
-            eventsService.saveAllVacunas(cow);
         }
         
         try {
