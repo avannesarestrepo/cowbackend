@@ -3,7 +3,9 @@ package com.co.cow_backend.ServiceImpl;
 import com.co.cow_backend.models.Cow;
 import com.co.cow_backend.models.Users;
 import com.co.cow_backend.repository.CowRepository;
+import com.co.cow_backend.repository.EventsRepository;
 import com.co.cow_backend.service.CowService;
+import com.co.cow_backend.service.EventsService;
 import com.co.cow_backend.utils.Constant;
 import com.co.cow_backend.utils.Response;
 import com.co.cow_backend.utils.ResponseDTO;
@@ -25,6 +27,9 @@ public class CowServiceImpl implements CowService {
 
     @Autowired
     CowRepository cowRepository;
+
+    @Autowired
+    EventsService eventsService;
 
     @Override
     public List<Cow> findAll() {
@@ -57,9 +62,10 @@ public class CowServiceImpl implements CowService {
         if(cow.getIdVaca() == 0){
             cow.setFechaVacunaAftosa(calculateDate(cow.getFechaNacimiento(), 40, true));
             cow.setFechaVacunaBrucelosis(calculateDate(cow.getFechaNacimiento(), 3, false));
+            cow.setNumeroPartos(0);
+            eventsService.saveAllVacunas(cow);
         }
-        cow.setNumeroPartos(0);
-
+        
         try {
             Cow cowResponse =  cowRepository.save(cow);
             return responseDTO.setResponseSuccess(cowResponse);

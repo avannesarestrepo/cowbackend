@@ -1,5 +1,6 @@
 package com.co.cow_backend.ServiceImpl;
 
+import com.co.cow_backend.models.Cow;
 import com.co.cow_backend.models.CowGestation;
 import com.co.cow_backend.models.Events;
 import com.co.cow_backend.repository.EventsRepository;
@@ -49,6 +50,17 @@ public class EventsServiceImpl implements EventsService {
     }
 
     @Override
+    public Response saveAllVacunas(Cow cow) {
+        ResponseDTO responseDTO = new ResponseDTO();
+        try {
+            List<Events> listEvents = eventsRepository.saveAll(registerEventsCow(cow));
+            return responseDTO.setResponseSuccess(listEvents);
+        }catch (Exception e){
+            return responseDTO.setResponseFailed(constant.CODE_INTERNAL_ERROR_SERVER(), "Error generico");
+        }
+    }
+
+    @Override
     public Response update(Events events) {
         ResponseDTO responseDTO = new ResponseDTO();
         try {
@@ -58,6 +70,13 @@ public class EventsServiceImpl implements EventsService {
             return responseDTO.setResponseFailed(constant.CODE_INTERNAL_ERROR_SERVER(),
                     constant.MESSAGE_DATA_INTEGRATY_VIOLATION());
         }
+    }
+
+    private List<Events> registerEventsCow(Cow cow){
+        List<Events> eventsAll = new ArrayList<>();
+        eventsAll.add(new Events(cow.getIdVaca(), "Fecha Vacuna Aftosa", cow.getFechaVacunaAftosa(), false));
+        eventsAll.add(new Events(cow.getIdVaca(), "Fecha Vacuna Brucelosis", cow.getFechaVacunaBrucelosis(), false));
+        return eventsAll;
     }
 
     private List<Events> registerEvents(CowGestation cowGestation){
